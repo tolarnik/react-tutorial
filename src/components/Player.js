@@ -16,7 +16,7 @@ class Player extends React.PureComponent {
     constructor(props){
         super(props);
         this.state = {
-            counter: 0
+            counter: parseInt(this.props.playerInitialHp)
         }
     }
 
@@ -34,6 +34,7 @@ class Player extends React.PureComponent {
                 <button onClick={this.increment} data-cy="inc-1">
                     <span role="img" aria-label="Plus">➕</span>
                 </button>
+                <strong  data-cy="name-1">Player: {this.props.playerName}</strong>
                 <div style={styles.center} data-cy="val-1">
                     {this.state.counter}
                 </div>
