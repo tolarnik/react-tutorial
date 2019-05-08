@@ -17,7 +17,8 @@ class App extends Component {
                     hp: 0,
                 }
             ],
-            gameStarted: false
+            gameStarted: false,
+            isMobile: !window.matchMedia("(min-width: 769px)").matches
         }
     }
 
@@ -25,7 +26,7 @@ class App extends Component {
         const {players} = this.state;
 
         if (this.state.gameStarted) {
-            return <GameBoard backToStart={this.backToStart} players={players}/>;
+            return <GameBoard backToStart={this.backToStart} players={players} useMobileStyles={this.state.isMobile}/>;
         } else {
             return <StartScreen onPlayerChange={this.handlePlayerChange} players={players} startGame={this.startGame}/>;
         }
