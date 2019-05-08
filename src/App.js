@@ -1,69 +1,40 @@
-import React, {Component} from 'react';
-import GameBoard from "./components/GameBoard";
+import React from 'react';
 import StartScreen from "./components/StartScreen";
+import GameBoard from "./components/GameBoard";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 
-class App extends Component {
+const App = () =>
+    <BrowserRouter>
+        <Switch>
+            <Route path="/" exact component={StartScreen}/>
+            <Route path="/board/:playerOne/:playerTwo" render={(props) =>{
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            players: [
-                {
-                    name: '',
-                    hp: 0,
-                },
-                {
-                    name: '',
-                    hp: 0,
-                }
-            ],
-            gameStarted: false,
-            isMobile: !window.matchMedia("(min-width: 769px)").matches
-        }
-    }
+                const playerOneParams = props.match.params.playerOne.split('🎲');
+                const playerTwoParams = props.match.params.playerTwo.split('🎲');
 
-    render() {
-        const {players} = this.state;
-
-        if (this.state.gameStarted) {
-            return <GameBoard backToStart={this.backToStart} players={players} useMobileStyles={this.state.isMobile}/>;
-        } else {
-            return <StartScreen onPlayerChange={this.handlePlayerChange} players={players} startGame={this.startGame}/>;
-        }
-    }
-
-    handlePlayerChange = (playerIndex, parameterName, newValue) => {
-
-        const newPlayers = this.state.players.slice();
-        newPlayers[playerIndex][parameterName] = newValue;
-
-        this.setState({
-            players: newPlayers
-        })
-    };
-
-    startGame = () => {
-        this.setState({
-            gameStarted: true
-        })
-    };
-
-    backToStart = () => {
-        this.setState({
-            players: [
-                {
-                    name: '',
-                    hp: 0,
-                },
-                {
-                    name: '',
-                    hp: 0,
-                }
-            ],
-            gameStarted: false
-        })
-    };
-
-}
+                return (
+                    <GameBoard
+                        players={[
+                            {
+                                name: playerOneParams.length === 2 ? playerOneParams[0] : '',
+                                hp: playerOneParams.length === 2 && !isNaN(parseInt(playerOneParams[1])) ? parseInt(playerOneParams[1]) : 20,
+                            },
+                            {
+                                name: playerTwoParams.length === 2 ? playerTwoParams[0] : '',
+                                hp: playerTwoParams.length === 2 && !isNaN(parseInt(playerTwoParams[1])) ? parseInt(playerTwoParams[1]) : 20,
+                            },
+                        ]}
+                        useMobileStyles={!window.matchMedia("(min-width: 769px)").matches}
+                    />
+                );
+            }}
+            />
+            <Route
+                render={() =>{
+                    console.log('redirect');
+                    return (<Redirect to="/"/>)}}
+            />
+        </Switch>
+    </BrowserRouter>;
 
 export default App;

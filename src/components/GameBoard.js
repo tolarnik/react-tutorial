@@ -1,5 +1,6 @@
 import React from 'react'
 import Player from "./Player";
+import {Link} from "react-router-dom";
 
 const styles = {
     container: {
@@ -29,9 +30,12 @@ const styles = {
 
 const GameBoard = (props) => (
     <div style={props.useMobileStyles ? {...styles.container, ...styles.mobileContainer} : styles.container}>
-        <button style={styles.floatButton} onClick={props.backToStart}>
+        <Link style={styles.floatButton} to={{
+            pathname: "/",
+            state: null
+        }}>
             <span role="img" aria-label={"Back button"}>🔙</span>
-        </button>
+        </Link>
 
         {props.players.map((p, index) =>
             <Player playerName={p.name}
