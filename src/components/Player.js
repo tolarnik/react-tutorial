@@ -31,14 +31,16 @@ class Player extends React.PureComponent {
     render() {
         return (
             <div style={styles.card}>
-                <button onClick={this.increment} data-cy="inc-1">
+                <button onClick={this.increment}  data-cy={"inc-"+this.props.playerIndex}>
                     <span role="img" aria-label="Plus">➕</span>
                 </button>
-                <strong  data-cy="name-1">Player: {this.props.playerName}</strong>
-                <div style={styles.center} data-cy="val-1">
+                <strong  data-cy={"name-"+this.props.playerIndex}>
+                    Player: {this.props.playerName}
+                </strong>
+                <div style={styles.center} data-cy={"val-"+this.props.playerIndex}>
                     {this.state.counter}
                 </div>
-                <button onClick={this.decrement} data-cy="dec-1">
+                <button onClick={this.decrement} data-cy={"dec-"+this.props.playerIndex}>
                     <span role="img" aria-label="Minus">➖</span>
                 </button>
             </div>
