@@ -19,6 +19,7 @@ class App extends Component {
         this.state = {
             name: '',
             hp: 0,
+            gameStarted: false
         }
     }
 
@@ -28,7 +29,8 @@ class App extends Component {
         return (
             <div style={styles.container}>
                 <PlayerForm onInputChange={this.handleInputChange} />
-                <Player playerName={name} playerInitialHp={hp} />
+                <button onClick={this.startGame}>Start</button>
+                {this.state.gameStarted && <Player playerName={name} playerInitialHp={hp}/>}
             </div>
         );
     }
@@ -39,6 +41,13 @@ class App extends Component {
             [inputName]: e.target.value
         })
     };
+
+    startGame = () => {
+        this.setState({
+            gameStarted: true
+        })
+    };
+
 }
 
 export default App;
