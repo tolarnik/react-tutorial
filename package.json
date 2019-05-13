@@ -12,6 +12,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "cypress open",
+    "test_1": "cypress run --spec cypress/integration/kap_1.js",
+    "test_2": "cypress run --spec cypress/integration/kap_2.js",
+    "test_3": "cypress run --spec cypress/integration/kap_3.js",
+    "test_4": "cypress run --spec cypress/integration/kap_4.js",
+    "test_5": "cypress run --spec cypress/integration/kap_5.js",
+    "test_6": "cypress run --config viewportWidth=600 --spec cypress/integration/kap_6.js",
+    "test_7": "cypress run --spec cypress/integration/kap_7.js",
+    "test_8": "cypress run --spec cypress/integration/kap_8.js",
+    "test_9": "cypress run --spec cypress/integration/kap_9.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
